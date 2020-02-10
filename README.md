@@ -1,14 +1,16 @@
-![](fluentbit_logo.png)
+# Fluent Bit
 
-Travis CI:
-[![Build Status](https://travis-ci.org/fluent/fluent-bit.svg?branch=master)](https://travis-ci.org/fluent/fluent-bit)
+This project is a fork of [fluentd/fluent-bit](https://github.com/fluent/fluent-bit). Due to the known [issue](https://github.com/fluent/fluent-bit/issues/365), the original Fluent Bit doesn't support dynamic configuration. To address that, we incorporate a [configuration reloader](main.go) on top of the original. 
 
-[Fluent Bit](http://fluentbit.io) is a fast Log Processor and Forwarder for Linux, Embedded Linux, MacOS and BSD family operating systems. It's part of the [Fluentd](http://fluentd.org) Ecosystem and a [CNCF](https://cncf.io) sub-project.
+## Development
 
-Fluent Bit allows to collect log events or metrics from different sources, process them and deliver them to different backends such as [Fluentd](http://fluentd.org), Elasticsearch, NATS, InfluxDB or any custom HTTP end-point within others.
+The following files have been either modified or added in comparison with the original Fluent Bit:
 
-In addition, Fluent Bit comes with full [Stream Processing](https://docs.fluentbit.io/stream-processing/) capabilities: data manipulation and analytics using SQL queries.
+- [main.go](main.go): implementes configuration reloader in Golang.
+- [Dockerfile](Dockerfile): launches main.go instead of fluent bit core.
+- [fluent-bit.conf](conf/fluent-bit.conf): links to `/fluent-bit/config/fluent-bit.conf`, the location for dynamic configuration
 
+<<<<<<< HEAD
 Fluent Bit runs on x86_64, x86, arm32v7 and arm64v8 architectures.
 
 ## Features
@@ -174,3 +176,6 @@ This program is under the terms of the [Apache License v2.0](http://www.apache.o
 ## Authors
 
 [Fluent Bit](http://fluentbit.io) is originally made and currently sponsored by [Treasure Data](http://treasuredata.com) among other [contributors](https://github.com/fluent/fluent-bit/graphs/contributors).
+=======
+![architecture](architecture.svg)
+>>>>>>> b22b5f39... feat: add config reloader
