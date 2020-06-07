@@ -67,9 +67,8 @@ RUN go get github.com/golang/glog
 RUN CGO_ENABLED=0 go build -o fluentbitdaemon ./fluentbitdaemon.go
 RUN CGO_ENABLED=0 go build -o fluentbitdisable ./fluentbitdisable.go
 
-FROM gcr.io/distroless/cc
+FROM gcr.io/distroless/cc-debian10
 LABEL maintainer="Eduardo Silva <eduardo@treasure-data.com>"
-LABEL Description="Fluent Bit docker image" Vendor="Fluent Organization" Version="1.1"
 LABEL Description="Fluent Bit docker image" Vendor="Fluent Organization" Version="1.1"
 
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/*sasl* /usr/lib/x86_64-linux-gnu/
@@ -97,7 +96,8 @@ COPY --from=builderc /usr/lib/x86_64-linux-gnu/libk5crypto* /usr/lib/x86_64-linu
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/liblber* /usr/lib/x86_64-linux-gnu/
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/libgnutls* /usr/lib/x86_64-linux-gnu/
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/libp11-kit* /usr/lib/x86_64-linux-gnu/
-COPY --from=builderc /usr/lib/x86_64-linux-gnu/libidn2* /usr/lib/x86_64-linux-gnu/
+COPY --from=builderc /usr/lib/x86_64-linux-gnu/libidn* /usr/lib/x86_64-linux-gnu/
+COPY --from=builderc /lib/x86_64-linux-gnu/libidn* /usr/lib/x86_64-linux-gnu/
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/libunistring* /usr/lib/x86_64-linux-gnu/
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/libtasn1* /usr/lib/x86_64-linux-gnu/
 COPY --from=builderc /usr/lib/x86_64-linux-gnu/libnettle* /usr/lib/x86_64-linux-gnu/
